@@ -1,65 +1,39 @@
-﻿<x-admin-layout>
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Add route</h1>
+﻿@extends('layouts.admin')
 
-    <x-ui.card>
-        <form method="POST" action="{{ route('admin.routes.store') }}" enctype="multipart/form-data" class="grid gap-4">
-            @csrf
-            <x-ui.input name="name" label="Route name" />
-            <x-ui.input name="pickup_point" label="Pickup point" />
-            <x-ui.input name="dropoff_point" label="Dropoff point" />
-            <x-ui.input name="price" type="number" label="Price" />
-            <x-ui.input name="duration_minutes" type="number" label="Duration (minutes)" />
+@section('content')
+<div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+        <h3 class="text-base font-bold text-slate-800 mb-1">➕ Thêm tuyến đường mới</h3>
+        <p class="text-xs text-slate-500 m-0">Điền thông tin lộ trình và giá vé cho tuyến xe đưa đón</p>
+    </div>
 
-            <label class="block text-sm font-medium text-gray-700">
-                <span class="mb-1 inline-block">Description</span>
-                <textarea name="description" rows="4" class="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary">{{ old('description') }}</textarea>
-                @error('description')
-                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                @enderror
-            </label>
+    <form action="{{ route('admin.routes.store') }}" method="POST" class="p-6 space-y-5 m-0">
+        @csrf
+        <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Tên tuyến đường</label>
+            <input type="text" name="name" required placeholder="Ví dụ: Sân bay Nội Bài - Quận Hoàn Kiếm" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl px-4 py-2.5 text-sm outline-none transition">
+        </div>
 
-            <x-ui.input name="image" type="file" label="Route image" />
-
-            <label class="block text-sm font-medium text-gray-700">
-                <span class="mb-1 inline-block">Status</span>
-                <select name="status" class="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary">
-                    <option value="active" selected>active</option>
-                    <option value="inactive">inactive</option>
-                </select>
-                @error('status')
-                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                @enderror
-            </label>
-
-            <label class="block text-sm font-medium text-gray-700">
-                <span class="mb-1 inline-block">Vehicle (optional)</span>
-                <select name="vehicle_id" class="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary">
-                    <option value="">Not selected</option>
-                    @foreach($vehicles as $vehicle)
-                        <option value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
-                    @endforeach
-                </select>
-                @error('vehicle_id')
-                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                @enderror
-            </label>
-
-            <label class="block text-sm font-medium text-gray-700">
-                <span class="mb-1 inline-block">Driver (optional)</span>
-                <select name="driver_id" class="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary">
-                    <option value="">Not selected</option>
-                    @foreach($drivers as $driver)
-                        <option value="{{ $driver->id }}">{{ $driver->name }}</option>
-                    @endforeach
-                </select>
-                @error('driver_id')
-                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                @enderror
-            </label>
-
-            <div class="flex justify-end">
-                <x-ui.button type="submit" variant="primary">Save route</x-ui.button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Điểm đón (Pickup)</label>
+                <input type="text" name="pickup_point" required placeholder="Ví dụ: Ga T1 Sân bay" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl px-4 py-2.5 text-sm outline-none transition">
             </div>
-        </form>
-    </x-ui.card>
-</x-admin-layout>
+            <div>
+                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Điểm trả (Dropoff)</label>
+                <input type="text" name="dropoff_point" required placeholder="Ví dụ: Nhà hát Lớn" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl px-4 py-2.5 text-sm outline-none transition">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Giá vé (VND)</label>
+            <input type="number" name="price" required placeholder="Ví dụ: 250000" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl px-4 py-2.5 text-sm outline-none transition">
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+            <a href="/admin/routes" class="text-xs font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl no-underline transition">Hủy bỏ</a>
+            <button type="submit" class="text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-xl shadow-md shadow-blue-500/10 transition cursor-pointer border-0">Lưu tuyến đường</button>
+        </div>
+    </form>
+</div>
+@endsection

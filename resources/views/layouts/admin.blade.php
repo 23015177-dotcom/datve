@@ -5,67 +5,231 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Airport Transfer') }} - Admin</title>
+        <title>Hệ thống Quản trị - Airport Transfer</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="{{ asset('build/assets/app-CEwZte8_.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-        <script defer src="{{ asset('build/assets/app-BjMeHjpC.js') }}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            navy: {
+                                800: '#1e293b',
+                                900: '#0f172a',
+                                950: '#020617'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+        <style>
+            body { font-family: 'Be Vietnam Pro', sans-serif !important; }
+            .sidebar-fix { width: 260px !important; min-width: 260px !important; }
+        </style>
     </head>
-    <body class="font-sans antialiased bg-surface text-gray-700">
-        <div class="min-h-screen flex admin-shell">
-            <aside class="w-64 bg-primary text-white admin-sidebar">
-                <div class="px-6 py-6 text-lg font-semibold border-b border-white/10">
-                    Airport Transfer
-                </div>
-                <nav class="flex-1 px-4 py-6 space-y-2 text-sm">
-                    <div class="sidebar-label">Overview</div>
-                    <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
-
-                    <div class="sidebar-label">Management</div>
-                    <a href="{{ route('admin.routes.index') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10 {{ request()->routeIs('admin.routes.*') ? 'active' : '' }}">Routes</a>
-                    <a href="{{ route('admin.vehicles.index') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10 {{ request()->routeIs('admin.vehicles.*') ? 'active' : '' }}">Vehicles</a>
-                    <a href="{{ route('admin.drivers.index') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10 {{ request()->routeIs('admin.drivers.*') ? 'active' : '' }}">Drivers</a>
-                    <a href="{{ route('admin.bookings.index') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10 {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}">Bookings</a>
-
-                    <div class="sidebar-label">Account</div>
-                    <a href="{{ route('home') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10">User Site</a>
-                </nav>
-                <div class="px-6 py-4 border-t border-white/10 text-xs text-white/70">
-                    © {{ date('Y') }} Airport Transfer
-                </div>
-            </aside>
-
-            <div class="flex-1 flex flex-col admin-main">
-                <header class="bg-white border-b border-gray-200">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                        <div class="text-lg font-semibold text-primary">Admin Panel</div>
-                        <nav class="admin-top-nav">
-                            <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
-                            <a href="{{ route('admin.routes.index') }}" class="{{ request()->routeIs('admin.routes.*') ? 'active' : '' }}">Routes</a>
-                            <a href="{{ route('admin.vehicles.index') }}" class="{{ request()->routeIs('admin.vehicles.*') ? 'active' : '' }}">Vehicles</a>
-                            <a href="{{ route('admin.drivers.index') }}" class="{{ request()->routeIs('admin.drivers.*') ? 'active' : '' }}">Drivers</a>
-                            <a href="{{ route('admin.bookings.index') }}" class="{{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}">Bookings</a>
-                        </nav>
-                        <div class="flex items-center gap-3 text-sm admin-user-tools">
-                            <a href="{{ route('home') }}" class="text-primary hover:underline">User Site</a>
-                            <span class="text-gray-500">{{ auth()->user()->name }}</span>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-ui.button type="submit" variant="outline" size="sm">Log out</x-ui.button>
-                            </form>
+    <body class="bg-slate-100 text-slate-800 antialiased">
+        <div class="min-h-screen flex">
+            
+            <div class="sidebar-fix bg-navy-950 text-slate-300 flex flex-col justify-between p-4 shrink-0 min-h-screen shadow-2xl border-r border-slate-800">
+                <div>
+                    <div class="text-white font-bold text-lg flex items-center gap-3 mb-8 px-2 border-b border-slate-800/60 pb-5">
+                        <span class="h-9 w-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-base shadow-lg shadow-blue-500/30">AT</span>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold tracking-wide text-white">Airport Transfer</span>
+                            <span class="text-[10px] text-slate-500 font-medium tracking-tight">Hệ thống quản lý xe</span>
                         </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block px-3 mb-2 tracking-widest">TỔNG QUAN</span>
+                            <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-white bg-blue-600 font-semibold shadow-md shadow-blue-600/10 no-underline text-sm block">
+                                📊 <span class="ml-2">Bảng điều khiển</span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block px-3 mb-2 tracking-widest">QUẢN LÝ DỊCH VỤ</span>
+                            <div class="flex flex-col space-y-1">
+                                <a href="/admin/routes" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    🗺️ <span class="ml-2">Tuyến đường</span>
+                                </a>
+                                <a href="/admin/vehicles" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    🚗 <span class="ml-2">Phương tiện</span>
+                                </a>
+                                <a href="/admin/drivers" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    👨‍✈️ <span class="ml-2">Tài xế điều khiển</span>
+                                </a>
+                                <a href="/admin/bookings" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    📅 <span class="ml-2">Danh sách đặt chỗ</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block px-3 mb-2 tracking-widest">CỬA SỔ KHÁCH</span>
+                            <a href="/" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                🌐 <span class="ml-2">Xem giao diện khách</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-[11px] text-slate-600 border-t border-slate-900 pt-4 px-2 font-medium">
+                    © 2026 Dịch vụ đưa đón sân bay
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col min-w-0">
+                
+                <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-8 shadow-sm sticky top-0 z-10">
+                    <div>
+                        <nav class="text-[11px] text-slate-400 font-medium mb-0.5">Admin Panel / Khu vực quản trị</nav>
+                        <h2 class="text-sm font-bold text-slate-800 m-0">Không gian điều hành</h2>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                            <span class="text-sm">👑</span>
+                            <span class="text-xs font-bold text-slate-700">{{ auth()->user()->name ?? 'Admin Demo' }}</span>
+                        </div>
+                        
+                        <form method="POST" action="{{ route('logout') }}" class="m-0">
+                            @csrf
+                            <button type="submit" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-4 py-2 rounded-xl border border-red-200/60 transition shadow-sm hover:shadow-md cursor-pointer flex items-center gap-1.5">
+                                Đăng xuất ↩
+                            </button>
+                        </form>
                     </div>
                 </header>
 
-                <main class="flex-1">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                        {{ $slot }}
-                    </div>
+                <main class="p-8 flex-1 overflow-y-auto w-full mx-auto bg-slate-50">
+                    {{ $slot ?? '' }}
+                    @yield('content')
                 </main>
+
+            </div>
+        </div>
+    </body>
+</html><!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>Hệ thống Quản trị - Airport Transfer</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            navy: {
+                                800: '#1e293b',
+                                900: '#0f172a',
+                                950: '#020617'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+        <style>
+            body { font-family: 'Be Vietnam Pro', sans-serif !important; }
+            .sidebar-fix { width: 260px !important; min-width: 260px !important; }
+        </style>
+    </head>
+    <body class="bg-slate-100 text-slate-800 antialiased">
+        <div class="min-h-screen flex">
+            
+            <div class="sidebar-fix bg-navy-950 text-slate-300 flex flex-col justify-between p-4 shrink-0 min-h-screen shadow-2xl border-r border-slate-800">
+                <div>
+                    <div class="text-white font-bold text-lg flex items-center gap-3 mb-8 px-2 border-b border-slate-800/60 pb-5">
+                        <span class="h-9 w-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-base shadow-lg shadow-blue-500/30">AT</span>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold tracking-wide text-white">Airport Transfer</span>
+                            <span class="text-[10px] text-slate-500 font-medium tracking-tight">Hệ thống quản lý xe</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block px-3 mb-2 tracking-widest">TỔNG QUAN</span>
+                            <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                📊 <span class="ml-2">Bảng điều khiển</span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block px-3 mb-2 tracking-widest">QUẢN LÝ DỊCH VỤ</span>
+                            <div class="flex flex-col space-y-1">
+                                <a href="/admin/routes" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    🗺️ <span class="ml-2">Tuyến đường</span>
+                                </a>
+                                <a href="/admin/vehicles" class="flex items-center px-3 py-2.5 rounded-xl text-white bg-blue-600 font-semibold shadow-md shadow-blue-600/10 text-sm no-underline transition block">
+                                    🚗 <span class="ml-2">Phương tiện</span>
+                                </a>
+                                <a href="/admin/drivers" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    👨‍✈️ <span class="ml-2">Tài xế điều khiển</span>
+                                </a>
+                                <a href="/admin/bookings" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                    📅 <span class="ml-2">Danh sách đặt chỗ</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-500 block px-3 mb-2 tracking-widest">CỬA SỔ KHÁCH</span>
+                            <a href="/" class="flex items-center px-3 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/50 text-sm no-underline transition block">
+                                🌐 <span class="ml-2">Xem giao diện khách</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-[11px] text-slate-600 border-t border-slate-900 pt-4 px-2 font-medium">
+                    © 2026 Dịch vụ đưa đón sân bay
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col min-w-0">
+                
+                <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-8 shadow-sm sticky top-0 z-10">
+                    <div>
+                        <nav class="text-[11px] text-slate-400 font-medium mb-0.5">Admin Panel / Khu vực quản trị</nav>
+                        <h2 class="text-sm font-bold text-slate-800 m-0">Không gian điều hành</h2>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                            <span class="text-sm">👑</span>
+                            <span class="text-xs font-bold text-slate-700">{{ auth()->user()->name ?? 'Admin Demo' }}</span>
+                        </div>
+                        
+                        <form method="POST" action="{{ route('logout') }}" class="m-0">
+                            @csrf
+                            <button type="submit" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-4 py-2 rounded-xl border border-red-200/60 transition shadow-sm hover:shadow-md cursor-pointer flex items-center gap-1.5">
+                                Đăng xuất ↩
+                            </button>
+                        </form>
+                    </div>
+                </header>
+
+                <main class="p-8 flex-1 overflow-y-auto w-full mx-auto bg-slate-50">
+                    @yield('content')
+                </main>
+
             </div>
         </div>
     </body>

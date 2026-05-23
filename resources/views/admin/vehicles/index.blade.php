@@ -1,46 +1,54 @@
-﻿<x-admin-layout>
-    <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Vehicle management</h1>
-        <a href="{{ route('admin.vehicles.create') }}" class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark">Add new</a>
+﻿<x-app-layout>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden w-full">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <div>
+                <h3 class="text-base font-bold text-slate-800 mb-1">Quản lý phương tiện</h3>
+                <p class="text-xs text-slate-500 m-0">Quản lý danh sách xe, số ghế và biển số xe đưa đón</p>
+            </div>
+            <a href="{{ route('admin.vehicles.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md shadow-blue-500/20 transition duration-200 flex items-center gap-2 no-underline">
+                ➕ Thêm xe mới
+            </a>
+        </div>
+
+        <div class="overflow-x-auto w-full">
+            <table class="w-full text-left border-collapse m-0">
+                <thead>
+                    <tr class="border-b border-slate-200 bg-slate-50">
+                        <th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500">Tên / Dòng xe</th>
+                        <th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500">Biển số xe</th>
+                        <th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500">Số ghế</th>
+                        <th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                    @forelse($vehicles as $vehicle)
+                        <tr class="hover:bg-slate-50/80 transition duration-150">
+                            <td class="p-4 font-semibold text-slate-700">🚗 {{ $vehicle->model }}</td>
+                            <td class="p-4">
+                                <span class="bg-slate-100 text-slate-800 font-mono px-2 py-1 rounded border border-slate-200 text-xs font-bold">
+                                    {{ $vehicle->license_plate }}
+                                </span>
+                            </td>
+                            <td class="p-4 text-slate-600 font-medium">{{ $vehicle->capacity }} chỗ</td>
+                            <td class="p-4">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="{{ route('admin.vehicles.edit', $vehicle) }}" class="text-xs font-bold text-amber-600 bg-amber-50 hover:bg-amber-100 border border-amber-200/60 px-3 py-1.5 rounded-lg no-underline transition">Sửa ✏️</a>
+                                    <form action="{{ route('admin.vehicles.destroy', $vehicle) }}" method="POST" class="m-0" onsubmit="return confirm('Xóa xe này?')">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200/60 px-3 py-1.5 rounded-lg transition cursor-pointer">Xóa 🗑️</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="p-8 text-center text-slate-400 font-medium">
+                                📭 Chưa có xe nào được tạo.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    @if(session('success'))
-        <x-ui.alert type="success">{{ session('success') }}</x-ui.alert>
-    @endif
-
-    <x-ui.table class="w-full">
-        <thead class="bg-gray-50 text-left text-xs uppercase text-gray-500">
-            <tr>
-                <th class="px-4 py-3">Vehicle name</th>
-                <th class="px-4 py-3">License plate</th>
-                <th class="px-4 py-3">Seats</th>
-                <th class="px-4 py-3">Status</th>
-                <th class="px-4 py-3 text-right">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100 bg-white">
-            @foreach($vehicles as $vehicle)
-                <tr>
-                    <td class="px-4 py-3 font-medium text-gray-800">{{ $vehicle->name }}</td>
-                    <td class="px-4 py-3">{{ $vehicle->license_plate }}</td>
-                    <td class="px-4 py-3">{{ $vehicle->seats }}</td>
-                    <td class="px-4 py-3">
-                        <x-ui.badge :color="$vehicle->status === 'active' ? 'green' : ($vehicle->status === 'maintenance' ? 'yellow' : 'gray')">{{ ucfirst($vehicle->status) }}</x-ui.badge>
-                    </td>
-                    <td class="px-4 py-3 text-right space-x-2">
-                        <a href="{{ route('admin.vehicles.edit', $vehicle) }}" class="text-primary hover:underline">Edit</a>
-                        <form method="POST" action="{{ route('admin.vehicles.destroy', $vehicle) }}" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Delete this vehicle?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </x-ui.table>
-
-    <div class="mt-6">
-        {{ $vehicles->links() }}
-    </div>
-</x-admin-layout>
+</x-app-layout>
