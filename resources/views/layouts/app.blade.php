@@ -12,10 +12,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Scripts -->
-        <link rel="stylesheet" href="{{ asset('build/assets/app-CEwZte8_.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-        <script defer src="{{ asset('build/assets/app-BjMeHjpC.js') }}"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-surface text-gray-700">
         <div class="min-h-screen flex flex-col">

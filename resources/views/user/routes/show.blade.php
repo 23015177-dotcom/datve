@@ -1,286 +1,120 @@
-﻿# resources/views/user/routes/show.blade.php
+﻿<x-app-layout>
+    <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px;">
 
-```blade
-<x-app-layout>
-
-    <section class="relative overflow-hidden bg-slate-950">
-
-        <div class="absolute inset-0 opacity-30">
-            @if($route->image)
-                <img
-                    src="{{ asset('storage/' . $route->image) }}"
-                    class="w-full h-full object-cover"
-                    alt="{{ $route->name }}"
-                >
-            @endif
-        </div>
-
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-900/70"></div>
-
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-
-            <div class="max-w-3xl">
-
-                <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-2 text-blue-200 text-sm font-medium mb-6">
-                    <span>Premium Airport Transfer</span>
+        <div style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 80px 20px; color: #ffffff; position: relative; overflow: hidden; text-align: left;">
+            <div style="max-w: 1200px; margin: 0 auto;">
+                
+                <div style="display: inline-block; background-color: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 50px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: #93c5fd; text-transform: uppercase; margin-bottom: 24px;">
+                    ✨ Dịch Vụ Đưa Đón Sân Bay Cao Cấp
                 </div>
 
-                <h1 class="text-5xl md:text-6xl font-black text-white leading-tight">
+                <h1 style="font-size: 42px; font-weight: 900; margin: 0 0 16px 0; line-height: 1.2; letter-spacing: -1px;">
                     {{ $route->name }}
                 </h1>
 
-                <p class="mt-6 text-lg text-slate-300 leading-relaxed max-w-2xl">
-                    Experience comfortable and reliable airport transportation with professional drivers and modern vehicles.
+                <p style="font-size: 16px; color: #cbd5e1; margin: 0 0 32px 0; max-width: 600px; line-height: 1.6; font-weight: 300;">
+                    Trải nghiệm hành trình di chuyển ra sân bay trọn vẹn, an tâm tuyệt đối với dàn xe đời mới tinh tươm và đội ngũ bác tài tận tâm, chuyên nghiệp.
                 </p>
 
-                <div class="mt-10 flex flex-wrap gap-4">
-
-                    <div class="bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl px-5 py-4 min-w-[180px]">
-                        <div class="text-slate-400 text-sm">
-                            Pickup Point
-                        </div>
-
-                        <div class="text-white font-semibold mt-1">
-                            {{ $route->pickup_point }}
-                        </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    
+                    <div style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 16px;">
+                        <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Điểm Đón</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-top: 6px; color: #ffffff;">📍 {{ $route->pickup_point }}</div>
                     </div>
 
-                    <div class="bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl px-5 py-4 min-w-[180px]">
-                        <div class="text-slate-400 text-sm">
-                            Dropoff Point
-                        </div>
-
-                        <div class="text-white font-semibold mt-1">
-                            {{ $route->dropoff_point }}
-                        </div>
+                    <div style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 16px;">
+                        <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Điểm Trả</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-top: 6px; color: #ffffff;">🏁 {{ $route->dropoff_point }}</div>
                     </div>
 
-                    <div class="bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl px-5 py-4 min-w-[180px]">
-                        <div class="text-slate-400 text-sm">
-                            Duration
-                        </div>
-
-                        <div class="text-white font-semibold mt-1">
-                            {{ $route->duration_minutes }} minutes
-                        </div>
+                    <div style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 16px;">
+                        <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Thời Gian Chạy</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-top: 6px; color: #ffffff;">⏱️ {{ $route->duration_minutes }} phút</div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+        <div style="max-width: 1200px; margin: 40px auto 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 30px;">
+            
+            <div style="flex: 2; min-width: 320px;">
+                
+                <div style="background-color: #ffffff; border-radius: 24px; padding: 32px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 8px 0;">Thông Tin Lộ Trình</h2>
+                    <p style="font-size: 14px; color: #64748b; margin: 0 0 30px 0;">Chi tiết sơ đồ các điểm dừng đón trả khách</p>
+                    
+                    <div style="border-left: 2px dashed #cbd5e1; padding-left: 24px; margin-left: 10px;">
+                        <div style="position: relative; margin-bottom: 32px;">
+                            <div style="position: absolute; left: -31px; top: 4px; width: 12px; h-height: 12px; background-color: #3b82f6; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
+                            <span style="font-size: 12px; font-weight: 700; color: #3b82f6; text-transform: uppercase;">Vị trí đón khách</span>
+                            <div style="font-size: 18px; font-weight: 700; color: #1e293b; margin-top: 4px;">{{ $route->pickup_point }}</div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <div style="position: absolute; left: -31px; top: 4px; width: 12px; h-height: 12px; background-color: #4f46e5; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
+                            <span style="font-size: 12px; font-weight: 700; color: #4f46e5; text-transform: uppercase;">Vị trí trả khách</span>
+                            <div style="font-size: 18px; font-weight: 700; color: #1e293b; margin-top: 4px;">{{ $route->dropoff_point }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: #ffffff; border-radius: 24px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 24px 0;">Đặc Quyền Tiện Ích Kèm Theo</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                        <div style="background-color: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0;">
+                            <span style="font-size: 28px;">🚘</span>
+                            <h4 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 12px 0 6px 0;">Xe Đời Mới</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.5;">Xe 4-7 chỗ sạch sẽ, mát mẻ, không mùi khó chịu.</p>
+                        </div>
+                        <div style="background-color: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0;">
+                            <span style="font-size: 28px;">👨‍✈️</span>
+                            <h4 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 12px 0 6px 0;">Tài Xế Lịch Sự</h4>
+                            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.5;">Ăn mặc chỉnh tề, điềm đạm, hỗ trợ hành lý chu đáo.</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
 
-        </div>
-
-    </section>
-
-
-    <section class="bg-slate-50 py-16">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="grid lg:grid-cols-3 gap-10">
-
-
-                <div class="lg:col-span-2 space-y-8">
-
-                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-
-                        <div class="flex items-center justify-between mb-8">
-
-                            <div>
-                                <h2 class="text-3xl font-bold text-slate-900">
-                                    Route Information
-                                </h2>
-
-                                <p class="mt-2 text-slate-500">
-                                    Full transfer route details.
-                                </p>
-                            </div>
-
-                            <div class="hidden md:flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
-                                Available Today
-                            </div>
-
+            <div style="flex: 1; min-width: 300px;">
+                <div style="background-color: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1); border: 1px solid #e2e8f0;">
+                    
+                    <div style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); padding: 30px; color: #ffffff;">
+                        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Chi Phí Trọn Gói Từ</div>
+                        <div style="margin-top: 8px; display: flex; align-items: baseline;">
+                            <span style="font-size: 38px; font-weight: 900; letter-spacing: -1px;">{{ number_format($route->price) }}</span>
+                            <span style="font-size: 16px; font-weight: 500; margin-left: 6px; opacity: 0.9;">VNĐ</span>
                         </div>
-
-
-                        <div class="space-y-8">
-
-                            <div class="flex items-start gap-5">
-
-                                <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">
-                                    📍
-                                </div>
-
-                                <div>
-                                    <div class="text-sm text-slate-400 font-medium">
-                                        Pickup Location
-                                    </div>
-
-                                    <div class="text-xl font-bold text-slate-900 mt-1">
-                                        {{ $route->pickup_point }}
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="border-l-2 border-dashed border-slate-300 ml-7 h-10"></div>
-
-
-                            <div class="flex items-start gap-5">
-
-                                <div class="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-2xl">
-                                    🏁
-                                </div>
-
-                                <div>
-                                    <div class="text-sm text-slate-400 font-medium">
-                                        Dropoff Location
-                                    </div>
-
-                                    <div class="text-xl font-bold text-slate-900 mt-1">
-                                        {{ $route->dropoff_point }}
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                        <div style="font-size: 11px; margin-top: 6px; font-style: italic; opacity: 0.7;">* Đã bao gồm phí cầu đường, cao tốc</div>
                     </div>
 
-
-                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-
-                        <h2 class="text-3xl font-bold text-slate-900">
-                            Why Choose This Transfer?
-                        </h2>
-
-                        <div class="grid md:grid-cols-2 gap-6 mt-8">
-
-                            <div class="rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                                <div class="text-3xl mb-4">🚘</div>
-                                <h3 class="font-bold text-lg text-slate-900">
-                                    Modern Vehicles
-                                </h3>
-                                <p class="mt-2 text-slate-500 leading-relaxed">
-                                    Comfortable vehicles with professional maintenance and clean interiors.
-                                </p>
+                    <div style="padding: 30px;">
+                        <div style="margin-bottom: 24px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 12px;">
+                                <span style="color: #64748b;">Loại hình</span>
+                                <span style="font-weight: 700; color: #1e293b;">Xe Riêng Biệt</span>
                             </div>
-
-                            <div class="rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                                <div class="text-3xl mb-4">👨‍✈️</div>
-                                <h3 class="font-bold text-lg text-slate-900">
-                                    Professional Drivers
-                                </h3>
-                                <p class="mt-2 text-slate-500 leading-relaxed">
-                                    Experienced and friendly drivers ensuring safe transportation.
-                                </p>
+                            <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                                <span style="color: #64748b;">Tình trạng</span>
+                                <span style="font-weight: 700; color: #10b981;">● Sẵn Sàng Xe</span>
                             </div>
-
-                            <div class="rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                                <div class="text-3xl mb-4">⏱️</div>
-                                <h3 class="font-bold text-lg text-slate-900">
-                                    On-Time Pickup
-                                </h3>
-                                <p class="mt-2 text-slate-500 leading-relaxed">
-                                    Reliable scheduling with optimized travel timing.
-                                </p>
-                            </div>
-
-                            <div class="rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                                <div class="text-3xl mb-4">🛡️</div>
-                                <h3 class="font-bold text-lg text-slate-900">
-                                    Safe Journey
-                                </h3>
-                                <p class="mt-2 text-slate-500 leading-relaxed">
-                                    Prioritizing passenger safety and comfortable travel experiences.
-                                </p>
-                            </div>
-
                         </div>
 
+                        <a href="{{ route('bookings.create', $route) }}" style="display: block; background-color: #0f172a; color: #ffffff; text-align: center; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 700; text-decoration: none; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);">
+                            Đặt Chuyến Xe Này 😉
+                        </a>
+
+                        <div style="font-size: 11px; color: #94a3b8; text-align: center; margin-top: 16px; line-height: 1.4;">
+                            🔒 Cam kết không phát sinh chi phí ẩn ngoài hóa đơn.
+                        </div>
                     </div>
 
                 </div>
-
-
-                <div>
-
-                    <div class="sticky top-24 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
-
-                        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
-
-                            <div class="text-sm uppercase tracking-wider text-blue-100 font-semibold">
-                                Starting Price
-                            </div>
-
-                            <div class="mt-3 text-5xl font-black">
-                                {{ number_format($route->price) }}
-                            </div>
-
-                            <div class="mt-1 text-blue-100">
-                                VND / trip
-                            </div>
-
-                        </div>
-
-
-                        <div class="p-8">
-
-                            <div class="space-y-5">
-
-                                <div class="flex items-center justify-between text-slate-600">
-                                    <span>Transfer Type</span>
-                                    <span class="font-semibold text-slate-900">
-                                        Private
-                                    </span>
-                                </div>
-
-                                <div class="flex items-center justify-between text-slate-600">
-                                    <span>Travel Duration</span>
-                                    <span class="font-semibold text-slate-900">
-                                        {{ $route->duration_minutes }} mins
-                                    </span>
-                                </div>
-
-                                <div class="flex items-center justify-between text-slate-600">
-                                    <span>Status</span>
-                                    <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
-                                        Available
-                                    </span>
-                                </div>
-
-                            </div>
-
-
-                            <div class="mt-8">
-
-                                <a
-                                    href="{{ route('bookings.create', $route) }}"
-                                    class="w-full inline-flex items-center justify-center rounded-2xl bg-slate-900 hover:bg-blue-600 transition-all duration-300 text-white font-bold py-4 text-lg"
-                                >
-                                    Book This Transfer
-                                </a>
-
-                            </div>
-
-
-                            <div class="mt-6 text-center text-sm text-slate-400 leading-relaxed">
-                                Secure booking process with instant confirmation and reliable service.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
 
         </div>
-
-    </section>
-
+    </div>
 </x-app-layout>
