@@ -7,26 +7,36 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Scripts -->
-        <link rel="stylesheet" href="{{ asset('build/assets/app-CEwZte8_.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-        <script defer src="{{ asset('build/assets/app-BjMeHjpC.js') }}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#4f46e5',
+                            surface: '#f8fafc',
+                        }
+                    }
+                }
+            }
+        </script>
     </head>
-    <body class="font-sans text-gray-800 antialiased bg-surface">
-        <div class="min-h-screen flex flex-col justify-center items-center px-4">
-            <a href="{{ route('routes.index') }}" class="mb-6 flex items-center gap-2 text-primary font-semibold">
-                <span class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">AT</span>
+    <body class="font-sans text-gray-800 antialiased bg-slate-50">
+        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8">
+            
+            <a href="#" class="mb-6 flex items-center gap-2 text-indigo-600 font-bold text-2xl no-underline">
+                <span class="h-10 w-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-extrabold text-lg">AT</span>
                 Airport Transfer
             </a>
 
-            <div class="w-full sm:max-w-md px-6 py-6 bg-white shadow-lg rounded-2xl border border-gray-100">
+            <div class="w-full sm:max-w-md px-8 py-8 bg-white shadow-xl rounded-2xl border border-gray-100">
                 {{ $slot }}
             </div>
+            
         </div>
     </body>
 </html>
