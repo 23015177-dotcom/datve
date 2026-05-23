@@ -1,8 +1,8 @@
 ﻿<x-app-layout>
-    <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px;">
+    <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px; text-align: left;">
 
         <div style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 80px 20px; color: #ffffff; position: relative; overflow: hidden; text-align: left;">
-            <div style="max-w: 1200px; margin: 0 auto;">
+            <div style="max-width: 1200px; margin: 0 auto;">
                 
                 <div style="display: inline-block; background-color: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 50px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: #93c5fd; text-transform: uppercase; margin-bottom: 24px;">
                     ✨ Dịch Vụ Đưa Đón Sân Bay Cao Cấp
@@ -47,13 +47,13 @@
                     
                     <div style="border-left: 2px dashed #cbd5e1; padding-left: 24px; margin-left: 10px;">
                         <div style="position: relative; margin-bottom: 32px;">
-                            <div style="position: absolute; left: -31px; top: 4px; width: 12px; h-height: 12px; background-color: #3b82f6; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
+                            <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background-color: #3b82f6; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
                             <span style="font-size: 12px; font-weight: 700; color: #3b82f6; text-transform: uppercase;">Vị trí đón khách</span>
                             <div style="font-size: 18px; font-weight: 700; color: #1e293b; margin-top: 4px;">{{ $route->pickup_point }}</div>
                         </div>
 
                         <div style="position: relative;">
-                            <div style="position: absolute; left: -31px; top: 4px; width: 12px; h-height: 12px; background-color: #4f46e5; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
+                            <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background-color: #4f46e5; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
                             <span style="font-size: 12px; font-weight: 700; color: #4f46e5; text-transform: uppercase;">Vị trí trả khách</span>
                             <div style="font-size: 18px; font-weight: 700; color: #1e293b; margin-top: 4px;">{{ $route->dropoff_point }}</div>
                         </div>

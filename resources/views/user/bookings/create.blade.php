@@ -1,118 +1,94 @@
 ﻿<x-app-layout>
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Xác Nhận Đặt Vé</h1>
-            <p class="mt-2 text-sm text-gray-600">Vui lòng kiểm tra lại thông tin hành trình và điền thông tin hành khách.</p>
+    <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px; min-height: 100vh; text-align: left;">
+
+        <div style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 60px 20px; color: #ffffff; text-align: left;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="display: inline-block; background-color: rgba(234, 88, 12, 0.2); border: 1px solid rgba(234, 88, 12, 0.4); border-radius: 50px; padding: 4px 14px; font-size: 12px; font-weight: 600; color: #f97316; text-transform: uppercase; margin-bottom: 16px;">
+                    ✍️ Tiến hành đặt chuyến
+                </div>
+                <h1 style="font-size: 32px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
+                    Xác Nhận Đặt Vé
+                </h1>
+                <p style="font-size: 14px; color: #cbd5e1; margin: 0; max-width: 600px; font-weight: 300;">
+                    Vui lòng kiểm tra lại thông tin hành trình bên dưới và điền thông tin hành khách để hoàn tất thủ tục đặt xe.
+                </p>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div style="max-width: 1000px; margin: 30px auto 0 auto; padding: 0 20px; display: flex; flex-direction: column; gap: 24px;">
             
-            <div class="lg:col-span-1 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl shadow-xl overflow-hidden relative">
-                <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between px-1 opacity-20 pointer-events-none">
-                    <div class="w-4 h-8 bg-gray-100 rounded-r-full -ml-2"></div>
-                    <div class="w-4 h-8 bg-gray-100 rounded-l-full -mr-2"></div>
-                </div>
-                
-                <div class="p-6 border-b border-dashed border-white/20 pb-8">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-500/30 text-indigo-200 mb-4">
-                        Thông tin chuyến xe
-                    </span>
-                    <h3 class="text-xl font-bold tracking-wide text-indigo-300">{{ $route->name }}</h3>
-                    
-                    <div class="mt-6 space-y-4">
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 w-2 h-2 rounded-full bg-emerald-400 ring-4 ring-emerald-400/20"></div>
-                            <div>
-                                <p class="text-xs text-slate-400 uppercase tracking-wider">Điểm đón</p>
-                                <p class="text-sm font-medium mt-0.5 text-slate-100">{{ $route->pickup_point }}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 w-2 h-2 rounded-full bg-amber-400 ring-4 ring-amber-400/20"></div>
-                            <div>
-                                <p class="text-xs text-slate-400 uppercase tracking-wider">Điểm trả</p>
-                                <p class="text-sm font-medium mt-0.5 text-slate-100">{{ $route->dropoff_point }}</p>
-                            </div>
-                        </div>
+            <div style="background-color: #ffffff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin: 0 0 16px 0; display: flex; align-items: center; gap: 8px;">
+                    🚏 Thông tin tuyến xe đã chọn
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div>
+                        <span style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Tên tuyến</span>
+                        <div style="font-size: 16px; font-weight: 700; color: #1e293b; margin-top: 4px;">{{ $route->name }}</div>
                     </div>
-                </div>
-
-                <div class="p-6 bg-white/5 pt-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm text-slate-400">Giá vé đơn:</span>
-                        <span class="text-lg font-bold text-amber-400">{{ number_format($route->price) }}đ <span class="text-xs text-slate-400 font-normal">/ khách</span></span>
+                    <div>
+                        <span style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Lộ trình</span>
+                        <div style="font-size: 15px; font-weight: 600; color: #334155; margin-top: 4px;">📍 {{ $route->pickup_point }} ➡️ 🏁 {{ $route->dropoff_point }}</div>
                     </div>
-                    
-                    <div class="bg-indigo-600/20 border border-indigo-500/30 rounded-xl p-4 text-center">
-                        <span class="text-xs uppercase tracking-wider text-indigo-300 font-semibold block mb-1">Tổng chi phí dự tính</span>
-                        <span id="total_price" class="text-2xl font-black text-white tracking-tight">0 VND</span>
+                    <div>
+                        <span style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Giá vé trọn gói</span>
+                        <div style="font-size: 18px; font-weight: 900; color: #1d4ed8; margin-top: 2px;">{{ number_format($route->price) }} VND</div>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
-                <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    Thông tin người đặt vé
+            <div style="background-color: #ffffff; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+                <h3 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 0 0 24px 0; display: flex; align-items: center; gap: 8px;">
+                    👤 Thông tin người đặt vé
                 </h3>
 
-                <form method="POST" action="{{ route('bookings.store') }}" class="space-y-6">
+                <form action="{{ route('bookings.store') }}" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
                     @csrf
                     <input type="hidden" name="transfer_route_id" value="{{ $route->id }}">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div>
-                            <x-ui.input name="passenger_name" label="Họ và tên hành khách" class="w-full rounded-xl" placeholder="Ví dụ: Nguyễn Văn A" />
-                        </div>
-                        <div>
-                            <x-ui.input name="passenger_phone" label="Số điện thoại liên hệ" class="w-full rounded-xl" placeholder="Ví dụ: 0912345xxx" />
-                        </div>
-                        <div>
-                            <x-ui.input name="pickup_time" type="datetime-local" label="Thời gian đón mong muốn" class="w-full rounded-xl" />
-                        </div>
-                        <div>
-                            <x-ui.input name="num_passengers" type="number" label="Số lượng hành khách đi cùng" id="num_passengers" min="1" value="1" class="w-full rounded-xl" />
-                        </div>
+                    <div>
+                        <label style="display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 8px;">
+                            Họ và tên hành khách <span style="color: #ef4444;">*</span>
+                        </label>
+                        <input type="text" name="customer_name" required placeholder="Ví dụ: Nguyễn Văn A" 
+                            style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; color: #1e293b; box-sizing: border-box;">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">
-                            <span class="mb-2 inline-block">Ghi chú đặc biệt cho tài xế (nếu có)</span>
-                            <textarea name="note" rows="4" class="w-full rounded-xl border-gray-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition duration-150" placeholder="Nhập yêu cầu đặc biệt về hành lý, điểm đón cụ thể..."></textarea>
+                        <label style="display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 8px;">
+                            Số điện thoại liên hệ <span style="color: #ef4444;">*</span>
                         </label>
-                        @error('note')
-                            <p class="mt-1 text-xs text-red-600 font-medium">{{ $message }}</p>
-                        @enderror
+                        <input type="tel" name="customer_phone" required placeholder="Ví dụ: 0912345xxx" 
+                            style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; color: #1e293b; box-sizing: border-box;">
                     </div>
 
-                    <div class="pt-4 border-t border-gray-100 flex items-center justify-end gap-3">
-                        <a href="javascript:history.back()" class="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
-                            Quay lại
-                        </a>
-                        <x-ui.button type="submit" class="px-6 py-2.5 rounded-xl font-semibold shadow-md bg-indigo-600 hover:bg-indigo-700 text-white transition">
-                            Xác Nhận Đặt Vé Ngay
-                        </x-ui.button>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 8px;">
+                                Thời gian đón mong muốn <span style="color: #ef4444;">*</span>
+                            </label>
+                            <input type="datetime-local" name="pickup_time" required 
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; color: #1e293b; box-sizing: border-box;">
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 8px;">
+                                Số lượng hành khách đi cùng
+                            </label>
+                            <input type="number" name="passenger_count" min="1" value="1" 
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; color: #1e293b; box-sizing: border-box;">
+                        </div>
                     </div>
+
+                    <div style="margin-top: 10px;">
+                        <button type="submit" style="width: 100%; background-color: #ea580c; color: #ffffff; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);">
+                            Xác Nhận Đặt Chuyến Ngay 🚀
+                        </button>
+                    </div>
+
                 </form>
             </div>
 
         </div>
-    </section>
-
-    <script>
-        const pricePerSeat = {{ (int) $route->price }};
-        const seatsInput = document.getElementById('num_passengers');
-        const totalEl = document.getElementById('total_price');
-
-        const formatMoney = (value) => new Intl.NumberFormat('vi-VN').format(value) + ' VND';
-        const updateTotal = () => {
-            const seats = Number(seatsInput.value || 0);
-            totalEl.textContent = formatMoney(seats * pricePerSeat);
-        };
-
-        seatsInput.addEventListener('input', updateTotal);
-        seatsInput.addEventListener('change', updateTotal);
-        updateTotal();
-    </script>
+    </div>
 </x-app-layout>

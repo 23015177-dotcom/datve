@@ -1,56 +1,89 @@
 ﻿<x-app-layout>
-    <section class="hero-panel">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="max-w-2xl">
-                <h1 class="page-title">Book your airport transfer</h1>
-                <p class="page-subtitle">Choose the right route and book in minutes.</p>
-            </div>
+    <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px; min-height: 100vh; text-align: left;">
+        
+        <div style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 60px 20px; color: #ffffff; text-align: left;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                
+                <h1 style="font-size: 36px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
+                    Book your airport transfer
+                </h1>
+                <p style="font-size: 15px; color: #94a3b8; margin: 0 0 30px 0;">
+                    Choose the right route and book in minutes.
+                </p>
 
-            <form class="mt-8 grid gap-4 md:grid-cols-3" method="GET" action="{{ route('routes.index') }}">
-                <x-ui.input name="pickup_point" label="Pickup point" placeholder="Example: Tan Son Nhat Airport" value="{{ $searchPickup }}" />
-                <x-ui.input name="dropoff_point" label="Dropoff point" placeholder="Example: District 1" value="{{ $searchDropoff }}" />
-                <div class="flex items-end">
-                    <x-ui.button type="submit" variant="accent" class="w-full">Search</x-ui.button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 page-section">
-        @if(session('success'))
-            <x-ui.alert type="success">{{ session('success') }}</x-ui.alert>
-        @endif
-
-        <div class="grid-cards">
-            @forelse($routes as $route)
-                <article class="route-card">
-                    @if($route->image)
-                        <img src="{{ asset('storage/' . $route->image) }}" alt="{{ $route->name }}" class="h-44 w-full object-cover">
-                    @endif
-                    <div class="route-card-body">
-                        <h3 class="text-lg font-semibold text-gray-800">{{ $route->name }}</h3>
-                        <div class="meta-list mt-2">
-                            <div>{{ $route->pickup_point }} -> {{ $route->dropoff_point }}</div>
-                            <div>Duration: {{ $route->duration_minutes }} minutes</div>
+                <form action="{{ route('routes.index') }}" method="GET" style="background-color: #ffffff; padding: 24px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 16px;">
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 6px; text-transform: uppercase;">
+                                Pickup point
+                            </label>
+                            <input type="text" name="pickup_point" value="{{ $searchPickup }}" placeholder="Example: Tan Son Nhat Airport" 
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; color: #1e293b; box-sizing: border-box;">
                         </div>
-                        <div class="mt-4 flex items-center justify-between">
-                            <div class="text-primary font-semibold">{{ number_format($route->price) }} VND</div>
-                            <a href="{{ route('routes.show', $route) }}" class="inline-flex items-center justify-center px-3 py-1.5 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-dark">
+
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 6px; text-transform: uppercase;">
+                                Dropoff point
+                            </label>
+                            <input type="text" name="dropoff_point" value="{{ $searchDropoff }}" placeholder="Example: District 1" 
+                                style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; color: #1e293b; box-sizing: border-box;">
+                        </div>
+                    </div>
+
+                    <button type="submit" style="width: 100%; background-color: #ea580c; color: #ffffff; padding: 14px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background-color 0.2s;">
+                        Search Chuyến Xe 🔍
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div style="max-width: 1200px; margin: 40px auto 0 auto; padding: 0 20px;">
+            
+            <h2 style="font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 24px;">
+                @if($searchPickup || $searchDropoff) Kết Quả Tìm Kiếm Chuyến Xe @else Tuyến Đường Phổ Biến Đang Sẵn Sàng @endif
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+                @forelse($routes as $route)
+                    <div style="background-color: #ffffff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">
+                                {{ $route->name }}
+                            </div>
+                            <div style="font-size: 14px; color: #64748b; margin-bottom: 6px;">
+                                📍 Từ: <span style="font-weight: 600; color: #334155;">{{ $route->pickup_point }}</span>
+                            </div>
+                            <div style="font-size: 14px; color: #64748b; margin-bottom: 12px;">
+                                🏁 Đến: <span style="font-weight: 600; color: #334155;">{{ $route->dropoff_point }}</span>
+                            </div>
+                            <div style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">
+                                ⏱️ Duration: {{ $route->duration_minutes }} minutes
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: auto;">
+                            <div style="font-size: 20px; font-weight: 900; color: #1d4ed8;">
+                                {{ number_format($route->price) }} <span style="font-size: 13px; font-weight: 600; color: #64748b;">VND</span>
+                            </div>
+                            <a href="{{ route('routes.show', $route) }}" style="background-color: #1e293b; color: #ffffff; padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background-color 0.2s;">
                                 View details
                             </a>
                         </div>
                     </div>
-                </article>
-            @empty
-                <div class="empty-state">
-                    <p>No routes match your search.</p>
-                    <p class="mt-1">Try changing pickup or dropoff keywords.</p>
-                </div>
-            @endforelse
-        </div>
+                @empty
+                    <div style="grid-column: 1 / -1; background-color: #ffffff; text-align: center; padding: 40px; border-radius: 16px; color: #64748b; font-weight: 500;">
+                        Thông cảm nha! Hiện tại chưa có tuyến xe phù hợp với yêu cầu tìm kiếm của bạn rồi 😢
+                    </div>
+                @endforelse
+            </div>
 
-        <div class="mt-8">
-            {{ $routes->links() }}
+            <div style="margin-top: 32px;">
+                {{ $routes->links() }}
+            </div>
+
         </div>
-    </section>
+    </div>
 </x-app-layout>
