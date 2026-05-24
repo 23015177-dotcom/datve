@@ -38,7 +38,7 @@
                     <select name="vehicle_id" required class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 transition bg-white cursor-pointer">
                         <option value="">-- Chọn xe chạy tuyến này --</option>
                         @foreach($vehicles as $vehicle)
-                            <option value="{{ $vehicle->id }}">{{ $vehicle->name ?? $vehicle->model }} ({{ $vehicle->license_plate }})</option>
+                            <option value="{{ $vehicle->id }}">{{ $vehicle->name }} ({{ $vehicle->license_plate }})</option>
                         @endforeach
                     </select>
                 </div>
