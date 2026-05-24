@@ -32,7 +32,7 @@
                     <a href="{{ route('admin.bookings.index') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10 {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}">Bookings</a>
 
                     <div class="sidebar-label">Account</div>
-                    <a href="{{ route('home') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10">User Site</a>
+                    <a href="{{ route('user.home') }}" class="block px-4 py-2 rounded-lg hover:bg-white/10">User Site</a>
                 </nav>
                 <div class="px-6 py-4 border-t border-white/10 text-xs text-white/70">
                     © {{ date('Y') }} Airport Transfer

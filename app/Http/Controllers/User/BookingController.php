@@ -45,6 +45,6 @@ class BookingController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('bookings.index')->with('success', 'Dat ve thanh cong.');
+        return redirect()->route('user.bookings.index')->with('success', 'Đặt vé thành công.');
     }
 }

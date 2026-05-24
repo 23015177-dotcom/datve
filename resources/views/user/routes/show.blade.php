@@ -1,4 +1,4 @@
-﻿<x-app-layout>
+<x-user-layout>
     <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px; text-align: left;">
 
         <div style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 80px 20px; color: #ffffff; position: relative; overflow: hidden; text-align: left;">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('bookings.create', $route) }}" style="display: block; background-color: #0f172a; color: #ffffff; text-align: center; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 700; text-decoration: none; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);">
+                        <a href="{{ route('user.bookings.create', $route) }}" style="display: block; background-color: #0f172a; color: #ffffff; text-align: center; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 700; text-decoration: none; transition: background-color 0.2s; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);">
                             Đặt Chuyến Xe Này 😉
                         </a>
 
@@ -117,4 +117,4 @@
 
         </div>
     </div>
-</x-app-layout>
+</x-user-layout>

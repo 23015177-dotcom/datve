@@ -9,19 +9,26 @@ use App\Http\Controllers\User\BookingController as UserBookingController;
 use App\Http\Controllers\User\RouteController as UserRouteController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return auth()->user()->role === 'admin'
-            ? redirect()->route('admin.dashboard')
-            : redirect()->route('home');
-    })->name('dashboard');
+Route::get('/', function () {
+    return redirect()->route('user.home');
+});
 
+Route::get('/dashboard', function () {
+    return auth()->user()->role === 'admin'
+        ? redirect()->route('admin.dashboard')
+        : redirect()->route('user.home');
+})->middleware(['auth'])->name('dashboard');
+
+Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserRouteController::class, 'index'])->name('home');
     Route::get('/routes', [UserRouteController::class, 'index'])->name('routes.index');
     Route::get('/routes/{route}', [UserRouteController::class, 'show'])->name('routes.show');
-    Route::get('/bookings', [UserBookingController::class, 'index'])->name('bookings.index');
-    Route::get('/bookings/create/{route}', [UserBookingController::class, 'create'])->name('bookings.create');
-    Route::post('/bookings', [UserBookingController::class, 'store'])->name('bookings.store');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/bookings', [UserBookingController::class, 'index'])->name('bookings.index');
+        Route::get('/bookings/create/{route}', [UserBookingController::class, 'create'])->name('bookings.create');
+        Route::post('/bookings', [UserBookingController::class, 'store'])->name('bookings.store');
+    });
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Database\Seeders;
 
@@ -9,7 +9,9 @@ use Illuminate\Database\Seeder;
 
 class DemoDataSeeder extends Seeder
 {
-    
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
         $vehicles = collect([
@@ -18,7 +20,12 @@ class DemoDataSeeder extends Seeder
             ['name' => 'Hyundai Solati', 'license_plate' => '51A-34567', 'seats' => 16, 'status' => 'maintenance'],
             ['name' => 'Mercedes Sprinter', 'license_plate' => '51A-45678', 'seats' => 19, 'status' => 'active'],
             ['name' => 'Kia Carnival', 'license_plate' => '51A-56789', 'seats' => 7, 'status' => 'inactive'],
-        ])->map(fn ($data) => Vehicle::create($data));
+        ])->map(
+            fn ($data) => Vehicle::updateOrCreate(
+                ['license_plate' => $data['license_plate']],
+                $data
+            )
+        );
 
         $drivers = collect([
             ['name' => 'Alex Nguyen', 'phone' => '0901000001', 'license_number' => 'DL-001', 'status' => 'active'],
@@ -26,7 +33,12 @@ class DemoDataSeeder extends Seeder
             ['name' => 'Chris Le', 'phone' => '0901000003', 'license_number' => 'DL-003', 'status' => 'inactive'],
             ['name' => 'Diana Pham', 'phone' => '0901000004', 'license_number' => 'DL-004', 'status' => 'active'],
             ['name' => 'Ethan Vo', 'phone' => '0901000005', 'license_number' => 'DL-005', 'status' => 'active'],
-        ])->map(fn ($data) => Driver::create($data));
+        ])->map(
+            fn ($data) => Driver::updateOrCreate(
+                ['license_number' => $data['license_number']],
+                $data
+            )
+        );
 
         $routes = [
             ['name' => 'Tan Son Nhat Airport - District 1', 'pickup_point' => 'Tan Son Nhat Airport', 'dropoff_point' => 'District 1', 'price' => 250000, 'duration_minutes' => 45, 'status' => 'active'],
@@ -37,11 +49,18 @@ class DemoDataSeeder extends Seeder
         ];
 
         foreach ($routes as $index => $route) {
-            TransferRoute::create(array_merge($route, [
-                'description' => 'Reliable and safe transfer service.',
-                'vehicle_id' => $vehicles[$index % $vehicles->count()]->id,
-                'driver_id' => $drivers[$index % $drivers->count()]->id,
-            ]));
+            TransferRoute::updateOrCreate(
+                [
+                    'name' => $route['name'],
+                    'pickup_point' => $route['pickup_point'],
+                    'dropoff_point' => $route['dropoff_point'],
+                ],
+                array_merge($route, [
+                    'description' => 'Reliable and safe transfer service.',
+                    'vehicle_id' => $vehicles[$index % $vehicles->count()]->id,
+                    'driver_id' => $drivers[$index % $drivers->count()]->id,
+                ])
+            );
         }
     }
 }

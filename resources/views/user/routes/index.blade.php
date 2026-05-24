@@ -1,4 +1,4 @@
-﻿<x-app-layout>
+<x-user-layout>
     <div style="background-color: #f1f5f9; font-family: 'Be Vietnam Pro', sans-serif; padding-bottom: 80px; min-height: 100vh; text-align: left;">
         
         <div style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); padding: 60px 20px; color: #ffffff; text-align: left;">
@@ -11,7 +11,7 @@
                     Choose the right route and book in minutes.
                 </p>
 
-                <form action="{{ route('routes.index') }}" method="GET" style="background-color: #ffffff; padding: 24px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 16px;">
+                <form action="{{ route('user.routes.index') }}" method="GET" style="background-color: #ffffff; padding: 24px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 16px;">
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
                         <div>
@@ -68,7 +68,7 @@
                             <div style="font-size: 20px; font-weight: 900; color: #1d4ed8;">
                                 {{ number_format($route->price) }} <span style="font-size: 13px; font-weight: 600; color: #64748b;">VND</span>
                             </div>
-                            <a href="{{ route('routes.show', $route) }}" style="background-color: #1e293b; color: #ffffff; padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background-color 0.2s;">
+                            <a href="{{ route('user.routes.show', $route) }}" style="background-color: #1e293b; color: #ffffff; padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background-color 0.2s;">
                                 View details
                             </a>
                         </div>
@@ -86,4 +86,4 @@
 
         </div>
     </div>
-</x-app-layout>
+</x-user-layout>
